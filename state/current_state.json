@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "department": "tony_stark",
+  "state": "ONBOARDING_STRICT",
+  "execution_mode": "DIAGNOSTIC_ONLY",
+  "victor_connection": "BOUND_PENDING_FRESH_ROUND_TRIP",
+  "live_certification": "NOT_VERIFIED",
+  "business_execution": "BLOCKED_PENDING_CERTIFICATION",
+  "current_task": null,
+  "current_incident": null,
+  "execution_lock": {
+    "active": false,
+    "task_id": null
+  },
+  "last_run_started": null,
+  "last_run_finished": null,
+  "last_verified_evidence": null,
+  "next_valid_action": "RUN_CONSTITUTIONAL_VALIDATION_THEN_FRESH_VICTOR_ROUND_TRIP",
+  "locked_decisions": [
+    "FOUNDER_FINAL_AUTHORITY",
+    "STRICT_VICTOR_SUPERVISION",
+    "DEPARTMENT_SCOPED_CREDENTIALS",
+    "NO_LIVE_CLAIM_WITHOUT_EVIDENCE"
+  ]
+}

@@ -1,0 +1,95 @@
+name: Victor Tony Strict Transport
+
+on:
+  workflow_dispatch:
+    inputs:
+      task_id:
+        description: Victor task ID
+        required: true
+        type: string
+      task_type:
+        description: Governed Tony task type
+        required: true
+        type: choice
+        options:
+          - STATUS_CHECK
+          - HEALTH_CHECK
+          - DIAGNOSTIC
+          - REPAIR_PLAN
+          - POST_REPAIR_VERIFY
+      payload:
+        description: JSON payload
+        required: false
+        default: '{}'
+        type: string
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'OBJECTIVE.md'
+      - 'SOUL.md'
+      - 'config/**'
+      - 'integration/victor_contract.json'
+      - '.github/workflows/victor_tony_transport.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run constitutional tests
+        run: python -m unittest discover -s tests -v
+
+  execute:
+    if: github.event_name == 'workflow_dispatch'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TONY_TASK_ID: ${{ inputs.task_id }}
+      TONY_TASK_TYPE: ${{ inputs.task_type }}
+      TONY_TASK_PAYLOAD: ${{ inputs.payload }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute governed Tony task
+        run: python src/tony_runtime.py
+      - name: Validate strict revert envelope
+        run: |
+          python - <<'PY'
+          import json, os
+          path=f"integration/results/tasks/{os.environ['TONY_TASK_ID']}.json"
+          data=json.load(open(path, encoding="utf-8"))
+          strict=data.get("strict_supervision") or {}
+          required=["status","objective_alignment","error_or_blocker","root_cause","solution","next_action","evidence","revert_to_victor","requires_follow_up"]
+          missing=[key for key in required if key not in strict]
+          if missing:
+              raise SystemExit("STRICT_REVERT_MISSING:"+",".join(missing))
+          if strict["revert_to_victor"] is not True or not strict["evidence"]:
+              raise SystemExit("STRICT_REVERT_INVALID")
+          if data.get("destructive_action_performed") is not False or data.get("paid_action_performed") is not False:
+              raise SystemExit("UNAUTHORIZED_ACTION_CLAIM")
+          print("STRICT_TONY_REVERT_OK")
+          PY
+      - name: Persist evidence
+        run: |
+          git config user.name "tony-stark-governed-runtime"
+          git config user.email "actions@users.noreply.github.com"
+          git add integration/results/tasks/${TONY_TASK_ID}.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Persist Tony task evidence ${TONY_TASK_ID}"
+          git push
+      - uses: actions/upload-artifact@v4
+        with:
+          name: victor-tony-result-${{ inputs.task_id }}
+          path: integration/results/tasks/${{ inputs.task_id }}.json
+          if-no-files-found: error

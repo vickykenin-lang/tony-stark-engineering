@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "department": "tony_stark",
+  "reports_to": "victor",
+  "supervision_mode": "STRICT",
+  "accepted_task_types": [
+    "STATUS_CHECK",
+    "HEALTH_CHECK",
+    "DIAGNOSTIC",
+    "REPAIR_PLAN",
+    "POST_REPAIR_VERIFY"
+  ],
+  "required_result_fields": [
+    "schema_version",
+    "message_type",
+    "sender",
+    "recipient",
+    "task_id",
+    "task_type",
+    "observed_at",
+    "execution_status",
+    "strict_supervision"
+  ],
+  "required_strict_fields": [
+    "status",
+    "objective_alignment",
+    "error_or_blocker",
+    "root_cause",
+    "solution",
+    "next_action",
+    "evidence",
+    "revert_to_victor",
+    "requires_follow_up"
+  ],
+  "hard_gates": {
+    "revert_to_victor_must_be_true": true,
+    "evidence_must_be_non_empty": true,
+    "secrets_forbidden": true,
+    "live_claim_requires_fresh_verification": true
+  },
+  "result_path_pattern": "integration/results/tasks/{task_id}.json"
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "authority_chain": [
+    "Founder Vicky Gautam",
+    "Dr. Victor",
+    "Tony Stark"
+  ],
+  "levels": {
+    "L0": {
+      "mode": "AUTO",
+      "scope": [
+        "read_repository_metadata",
+        "validate_constitution",
+        "parse_logs",
+        "classify_incident",
+        "generate_status_report"
+      ]
+    },
+    "L1": {
+      "mode": "AUTO",
+      "scope": [
+        "run_safe_tests",
+        "create_diagnostic_artifact",
+        "propose_least_risk_fix",
+        "non_destructive_local_repair"
+      ]
+    },
+    "L2": {
+      "mode": "VICTOR_AUTHORIZATION",
+      "scope": [
+        "modify_department_code",
+        "modify_workflow",
+        "modify_non_secret_configuration",
+        "execute_governed_repair"
+      ]
+    },
+    "L3": {
+      "mode": "FOUNDER_ONLY",
+      "scope": [
+        "production_deployment",
+        "credential_provisioning_or_rotation",
+        "paid_service_enablement",
+        "external_side_effect",
+        "destructive_action"
+      ]
+    },
+    "L4": {
+      "mode": "FOUNDER_ONLY",
+      "scope": [
+        "change_identity",
+        "change_locked_objective",
+        "change_soul",
+        "change_authority_chain",
+        "security_policy_exception"
+      ]
+    }
+  },
+  "prohibited": [
+    "expose_secret_values",
+    "bypass_founder_gate",
+    "fabricate_evidence",
+    "self_expand_authority",
+    "silent_objective_change"
+  ],
+  "default": "PROHIBITED_UNLESS_EXPLICITLY_LISTED"
+}

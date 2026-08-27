@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "message_type": "TASK_RESULT",
+  "sender": "tony_stark",
+  "recipient": "victor",
+  "task_id": "victor-tony-1787812634569-288",
+  "task_type": "TASK_REQUEST",
+  "observed_at": "2026-08-27T06:37:30.248312+00:00",
+  "execution_status": "ACCEPTED_PENDING_EXECUTION_EVIDENCE",
+  "repair_executed": false,
+  "destructive_action_performed": false,
+  "paid_action_performed": false,
+  "production_action_performed": false,
+  "strict_supervision": {
+    "status": "TASK_ACCEPTED_GOVERNED",
+    "objective_alignment": "CHECKED_AGAINST_LOCKED_OBJECTIVE",
+    "error_or_blocker": null,
+    "root_cause": null,
+    "solution": "Governed task envelope accepted. Only authorized repository work may proceed; production, secrets, paid and destructive actions remain blocked.",
+    "next_action": "VICTOR_REVIEW_AND_PUSH_NEXT_ACTION",
+    "evidence": [
+      "integration/results/tasks/victor-tony-1787812634569-288.json",
+      "OBJECTIVE.md",
+      "SOUL.md",
+      "config/authority.json",
+      "state/current_state.json",
+      "integration/victor_contract.json",
+      "config/authority.json"
+    ],
+    "revert_to_victor": true,
+    "requires_follow_up": true
+  },
+  "task_request": {
+    "schema_version": 1,
+    "objective": "Tony ka read-only RIO audit executor implement karo. TASK_ACCEPTED ke baad rio-affiliate-engine inspect karke actual findings, root causes, file evidence aur prioritized repair plan return kare. L0 boundary preserve rahe.",
+    "target_repository": "vickykenin-lang/rio-affiliate-engine",
+    "requested_actions": [
+      "READ_REPOSITORY",
+      "ANALYZE",
+      "RETURN_EVIDENCE",
+      "PROPOSE_OR_APPLY_CODE_CHANGE_SUBJECT_TO_AUTHORITY"
+    ],
+    "authority": {
+      "requested_by": "founder_via_victor",
+      "supervision_mode": "STRICT",
+      "maximum_level": "L2",
+      "production_activation_authorized": false
+    },
+    "prohibited_actions": [
+      "EXPOSE_OR_ROTATE_SECRETS",
+      "PAID_ACTION",
+      "DESTRUCTIVE_ACTION",
+      "PRODUCTION_DEPLOYMENT",
+      "LOCKED_OBJECTIVE_OR_AUTHORITY_CHANGE"
+    ],
+    "evidence_requirements": [
+      "TASK_RESULT_ENVELOPE",
+      "CHANGED_FILES_OR_PLAN",
+      "TEST_RESULTS",
+      "BLOCKERS"
+    ],
+    "founder_message": "Tony ka read-only RIO audit executor implement karo. TASK_ACCEPTED ke baad rio-affiliate-engine inspect karke actual findings, root causes, file evidence aur prioritized repair plan return kare. L0 boundary preserve rahe."
+  },
+  "payload": {
+    "schema_version": 1,
+    "objective": "Tony ka read-only RIO audit executor implement karo. TASK_ACCEPTED ke baad rio-affiliate-engine inspect karke actual findings, root causes, file evidence aur prioritized repair plan return kare. L0 boundary preserve rahe.",
+    "target_repository": "vickykenin-lang/rio-affiliate-engine",
+    "requested_actions": [
+      "READ_REPOSITORY",
+      "ANALYZE",
+      "RETURN_EVIDENCE",
+      "PROPOSE_OR_APPLY_CODE_CHANGE_SUBJECT_TO_AUTHORITY"
+    ],
+    "authority": {
+      "requested_by": "founder_via_victor",
+      "supervision_mode": "STRICT",
+      "maximum_level": "L2",
+      "production_activation_authorized": false
+    },
+    "prohibited_actions": [
+      "EXPOSE_OR_ROTATE_SECRETS",
+      "PAID_ACTION",
+      "DESTRUCTIVE_ACTION",
+      "PRODUCTION_DEPLOYMENT",
+      "LOCKED_OBJECTIVE_OR_AUTHORITY_CHANGE"
+    ],
+    "evidence_requirements": [
+      "TASK_RESULT_ENVELOPE",
+      "CHANGED_FILES_OR_PLAN",
+      "TEST_RESULTS",
+      "BLOCKERS"
+    ],
+    "founder_message": "Tony ka read-only RIO audit executor implement karo. TASK_ACCEPTED ke baad rio-affiliate-engine inspect karke actual findings, root causes, file evidence aur prioritized repair plan return kare. L0 boundary preserve rahe."
+  }
+}

@@ -63,3 +63,57 @@ def audit_repository(root: Path, task_id: str):
         "secret_access_performed": False,
         "production_action_performed": False,
     }
+
+def build_repair_plan(audit, payload):
+    return {
+        "schema_version": 1,
+        "task_id": audit["task_id"],
+        "plan_mode": "L1_GOVERNED_PLAN_ONLY",
+        "target_repository": audit["target_repository"],
+        "source_audit": f"integration/results/audits/{audit['task_id']}.json",
+        "objective": payload.get("objective"),
+        "recommended_changes": [
+            {
+                "priority": "P0",
+                "file": ".github/workflows/rio.yml",
+                "change": "Gate autonomous_business_cycle, content-review, discover-products and instagram-publish behind an explicit ACTIVE production-state check; PARKED permits audit/document/plan only.",
+                "reason": "Scheduled autonomous jobs and external publishing must not run while canonical production state is PARKED.",
+            },
+            {
+                "priority": "P0",
+                "file": ".github/workflows/rio.yml",
+                "change": "Replace workflow-level contents:write with least-privilege job-level permissions; telegram-test and non-writing checks use contents:read.",
+                "reason": "Only jobs that persist validated state require repository write authority.",
+            },
+            {
+                "priority": "P1",
+                "file": ".github/workflows/rio.yml",
+                "change": "Replace git add -A with explicit allowlisted output paths for heartbeat, content review, product discovery and Instagram status.",
+                "reason": "Broad staging can silently commit unrelated code, configuration or generated files.",
+            },
+            {
+                "priority": "P1",
+                "file": ".github/workflows/victor-rio-transport.yml",
+                "change": "Retain contents:write only for the evidence-persist job and continue staging only integration/results/victor_tasks/{task_id}.json.",
+                "reason": "Write access is justified for traceable evidence but must not expand to business execution.",
+            },
+            {
+                "priority": "P1",
+                "file": "tests/",
+                "change": "Add workflow-policy tests for PARKED gates, job-level permissions, explicit git-add allowlists and prohibition of production/external actions.",
+                "reason": "Current static inventory detected only tests/test_economics.py; governance regressions need deterministic coverage.",
+            },
+        ],
+        "implementation_sequence": [
+            "Add failing governance tests",
+            "Add canonical production-state gate",
+            "Narrow job permissions and staged paths",
+            "Run validators and workflow-policy tests",
+            "Return diff and test evidence to Victor",
+            "Require Founder approval before production activation",
+        ],
+        "prohibited_during_plan": payload.get("prohibited_actions", []),
+        "repository_change_performed": False,
+        "production_action_performed": False,
+        "requires_founder_approval_for_implementation": True,
+    }

@@ -4,7 +4,7 @@ import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from rio_readonly_audit import audit_repository
+from rio_readonly_audit import audit_repository, build_repair_plan
 
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED = {"STATUS_CHECK", "HEALTH_CHECK", "DIAGNOSTIC", "REPAIR_PLAN", "POST_REPAIR_VERIFY", "TASK_REQUEST"}
@@ -122,6 +122,16 @@ def main():
                 strict["solution"] = audit["summary"]
                 strict["next_action"] = "VICTOR_REVIEW_AUDIT_AND_AUTHORIZE_REPAIR_PLAN"
                 strict["evidence"].extend([str(audit_out.relative_to(ROOT))] + audit["evidence_files"][:12])
+                if payload.get("authority", {}).get("maximum_level") == "L1" and re.search(r"repair[ _-]?plan", payload.get("objective", ""), re.I):
+                    plan = build_repair_plan(audit, payload)
+                    plan_out = ROOT / "integration" / "results" / "plans" / f"{task_id}.json"
+                    plan_out.parent.mkdir(parents=True, exist_ok=True)
+                    plan_out.write_text(json.dumps(plan, indent=2) + "\n", encoding="utf-8")
+                    execution_status = "REPAIR_PLAN_READY"
+                    strict["status"] = "REPAIR_PLAN_READY"
+                    strict["solution"] = f"Governed RIO workflow repair plan prepared with {len(plan['recommended_changes'])} evidence-based changes. No repository change was executed."
+                    strict["next_action"] = "VICTOR_REVIEW_PLAN_AND_REQUEST_FOUNDER_IMPLEMENTATION_APPROVAL"
+                    strict["evidence"].append(str(plan_out.relative_to(ROOT)))
     elif task_type == "DIAGNOSTIC":
         strict["error_or_blocker"] = strict["error_or_blocker"] or payload.get("error_or_blocker") or "DIAGNOSTIC_INPUT_REQUIRED"
         strict["root_cause"] = strict["root_cause"] or "PENDING_EVIDENCE_BASED_ROOT_CAUSE_ANALYSIS"

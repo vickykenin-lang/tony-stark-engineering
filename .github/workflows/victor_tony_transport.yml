@@ -112,6 +112,9 @@ jobs:
           if [ -f integration/results/audits/${TONY_TASK_ID}.json ]; then
             git add integration/results/audits/${TONY_TASK_ID}.json
           fi
+          if [ -f integration/results/plans/${TONY_TASK_ID}.json ]; then
+            git add integration/results/plans/${TONY_TASK_ID}.json
+          fi
           git diff --cached --quiet && exit 0
           git commit -m "Persist Tony task evidence ${TONY_TASK_ID}"
           git push
@@ -121,6 +124,7 @@ jobs:
           path: |
             integration/results/tasks/${{ inputs.task_id }}.json
             integration/results/audits/${{ inputs.task_id }}.json
+            integration/results/plans/${{ inputs.task_id }}.json
           if-no-files-found: error
       - name: Preserve fail-closed workflow conclusion
         if: steps.execute_task.outcome == 'failure'

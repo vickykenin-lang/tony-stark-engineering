@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "message_type": "TASK_RESULT",
+  "sender": "tony_stark",
+  "recipient": "victor",
+  "task_id": "victor-tony-1787810334055-272",
+  "task_type": "STATUS_CHECK",
+  "observed_at": "2026-08-27T05:59:11.934451+00:00",
+  "execution_status": "COMPLETED_DIAGNOSTIC",
+  "repair_executed": false,
+  "destructive_action_performed": false,
+  "paid_action_performed": false,
+  "strict_supervision": {
+    "status": "ONBOARDING_STRICT",
+    "objective_alignment": "CHECKED_AGAINST_LOCKED_OBJECTIVE",
+    "error_or_blocker": null,
+    "root_cause": null,
+    "solution": "No repair is executed unless evidence and authority permit it.",
+    "next_action": "VICTOR_REVIEW_AND_PUSH_NEXT_ACTION",
+    "evidence": [
+      "integration/results/tasks/victor-tony-1787810334055-272.json",
+      "OBJECTIVE.md",
+      "SOUL.md",
+      "config/authority.json",
+      "state/current_state.json"
+    ],
+    "revert_to_victor": true,
+    "requires_follow_up": true
+  },
+  "payload": {
+    "founder_message": "Victor\u2013Tony governed TASK_REQUEST bridge upgrade karo. Generic engineering tasks, authority limits, prohibited actions aur evidence-based result return support add karo. Existing STATUS_CHECK preserve karo. Tests aur fresh round-trip verify karne ke baad hi complete claim karna.",
+    "requested_by": "victor",
+    "supervision_mode": "STRICT"
+  }
+}

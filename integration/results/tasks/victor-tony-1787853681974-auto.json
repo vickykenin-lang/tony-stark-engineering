@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "message_type": "TASK_RESULT",
+  "sender": "tony_stark",
+  "recipient": "victor",
+  "task_id": "victor-tony-1787853681974-auto",
+  "task_type": "DIAGNOSTIC",
+  "observed_at": "2026-08-27T18:01:41.918006+00:00",
+  "execution_status": "COMPLETED_DIAGNOSTIC",
+  "repair_executed": false,
+  "destructive_action_performed": false,
+  "paid_action_performed": false,
+  "production_action_performed": false,
+  "strict_supervision": {
+    "status": "ONBOARDING_STRICT",
+    "objective_alignment": "CHECKED_AGAINST_LOCKED_OBJECTIVE",
+    "error_or_blocker": "DIAGNOSTIC_INPUT_REQUIRED",
+    "root_cause": "PENDING_EVIDENCE_BASED_ROOT_CAUSE_ANALYSIS",
+    "solution": "Collect relevant logs/config/runtime evidence, isolate root cause, then propose the least-risk authorized repair.",
+    "next_action": "VICTOR_REVIEW_AND_PUSH_NEXT_ACTION",
+    "evidence": [
+      "integration/results/tasks/victor-tony-1787853681974-auto.json",
+      "OBJECTIVE.md",
+      "SOUL.md",
+      "config/authority.json",
+      "state/current_state.json"
+    ],
+    "revert_to_victor": true,
+    "requires_follow_up": true
+  },
+  "task_request": null,
+  "payload": {
+    "founder_message": "Tony Stark autonomous DIAGNOSTIC follow-up. Diagnose the reported routine blocker and return evidence. No production, paid, destructive, credential or external action.",
+    "requested_by": "victor",
+    "supervision_mode": "STRICT"
+  }
+}

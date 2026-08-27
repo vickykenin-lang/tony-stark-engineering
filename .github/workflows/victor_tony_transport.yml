@@ -63,6 +63,8 @@ jobs:
         with:
           python-version: '3.12'
       - name: Execute governed Tony task
+        id: execute_task
+        continue-on-error: true
         run: python src/tony_runtime.py
       - name: Validate strict revert envelope
         run: |
@@ -94,3 +96,8 @@ jobs:
           name: victor-tony-result-${{ inputs.task_id }}
           path: integration/results/tasks/${{ inputs.task_id }}.json
           if-no-files-found: error
+      - name: Preserve fail-closed workflow conclusion
+        if: steps.execute_task.outcome == 'failure'
+        run: |
+          echo "Tony task SAFE_STOP evidence was persisted for Victor review."
+          exit 1

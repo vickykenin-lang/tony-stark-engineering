@@ -105,9 +105,10 @@ def main():
 
     execution_status = "COMPLETED_DIAGNOSTIC"
     if task_type == "TASK_REQUEST":
-        execution_status = "ACCEPTED_PENDING_EXECUTION_EVIDENCE"
-        strict["solution"] = "Governed task envelope accepted. Only authorized repository work may proceed; production, secrets, paid and destructive actions remain blocked."
         strict["evidence"].extend(["integration/victor_contract.json", "config/authority.json"])
+        if not errors:
+            execution_status = "ACCEPTED_PENDING_EXECUTION_EVIDENCE"
+            strict["solution"] = "Governed task envelope accepted. Only authorized repository work may proceed; production, secrets, paid and destructive actions remain blocked."
     elif task_type == "DIAGNOSTIC":
         strict["error_or_blocker"] = strict["error_or_blocker"] or payload.get("error_or_blocker") or "DIAGNOSTIC_INPUT_REQUIRED"
         strict["root_cause"] = strict["root_cause"] or "PENDING_EVIDENCE_BASED_ROOT_CAUSE_ANALYSIS"

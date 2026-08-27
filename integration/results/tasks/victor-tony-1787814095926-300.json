@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "message_type": "TASK_RESULT",
+  "sender": "tony_stark",
+  "recipient": "victor",
+  "task_id": "victor-tony-1787814095926-300",
+  "task_type": "TASK_REQUEST",
+  "observed_at": "2026-08-27T07:01:51.824160+00:00",
+  "execution_status": "REPAIR_PLAN_READY",
+  "repair_executed": false,
+  "destructive_action_performed": false,
+  "paid_action_performed": false,
+  "production_action_performed": false,
+  "strict_supervision": {
+    "status": "REPAIR_PLAN_READY",
+    "objective_alignment": "CHECKED_AGAINST_LOCKED_OBJECTIVE",
+    "error_or_blocker": null,
+    "root_cause": "WRITE_ENABLED_WORKFLOWS",
+    "solution": "Governed RIO workflow repair plan prepared with 5 evidence-based changes. No repository change was executed.",
+    "next_action": "VICTOR_REVIEW_PLAN_AND_REQUEST_FOUNDER_IMPLEMENTATION_APPROVAL",
+    "evidence": [
+      "integration/results/tasks/victor-tony-1787814095926-300.json",
+      "OBJECTIVE.md",
+      "SOUL.md",
+      "config/authority.json",
+      "state/current_state.json",
+      "integration/victor_contract.json",
+      "config/authority.json",
+      "integration/results/audits/victor-tony-1787814095926-300.json",
+      "README.md",
+      ".github/workflows/deploy-pages.yml",
+      ".github/workflows/rio.yml",
+      ".github/workflows/victor-rio-transport.yml",
+      "tests/test_economics.py",
+      "integration/results/plans/victor-tony-1787814095926-300.json"
+    ],
+    "revert_to_victor": true,
+    "requires_follow_up": true
+  },
+  "task_request": {
+    "schema_version": 1,
+    "objective": "Tony Stark ko RIO workflow governance REPAIR_PLAN task do\nTarget repository: vickykenin-lang/rio-affiliate-engine\nObjective: REPAIR_PLAN for rio.yml and victor-rio-transport.yml permissions, scheduled jobs, git add scope and PARKED-state compliance\nAuthority L1 only\nCode change, deployment, production activation, secret access, paid action aur destructive action prohibited hain",
+    "target_repository": "vickykenin-lang/rio-affiliate-engine",
+    "requested_actions": [
+      "READ_REPOSITORY",
+      "ANALYZE",
+      "RETURN_EVIDENCE"
+    ],
+    "authority": {
+      "requested_by": "founder_via_victor",
+      "supervision_mode": "STRICT",
+      "maximum_level": "L1",
+      "production_activation_authorized": false
+    },
+    "prohibited_actions": [
+      "EXPOSE_OR_ROTATE_SECRETS",
+      "PAID_ACTION",
+      "DESTRUCTIVE_ACTION",
+      "PRODUCTION_DEPLOYMENT",
+      "LOCKED_OBJECTIVE_OR_AUTHORITY_CHANGE"
+    ],
+    "evidence_requirements": [
+      "TASK_RESULT_ENVELOPE",
+      "CHANGED_FILES_OR_PLAN",
+      "TEST_RESULTS",
+      "BLOCKERS"
+    ],
+    "founder_message": "Tony Stark ko RIO workflow governance REPAIR_PLAN task do\nTarget repository: vickykenin-lang/rio-affiliate-engine\nObjective: REPAIR_PLAN for rio.yml and victor-rio-transport.yml permissions, scheduled jobs, git add scope and PARKED-state compliance\nAuthority L1 only\nCode change, deployment, production activation, secret access, paid action aur destructive action prohibited hain"
+  },
+  "payload": {
+    "schema_version": 1,
+    "objective": "Tony Stark ko RIO workflow governance REPAIR_PLAN task do\nTarget repository: vickykenin-lang/rio-affiliate-engine\nObjective: REPAIR_PLAN for rio.yml and victor-rio-transport.yml permissions, scheduled jobs, git add scope and PARKED-state compliance\nAuthority L1 only\nCode change, deployment, production activation, secret access, paid action aur destructive action prohibited hain",
+    "target_repository": "vickykenin-lang/rio-affiliate-engine",
+    "requested_actions": [
+      "READ_REPOSITORY",
+      "ANALYZE",
+      "RETURN_EVIDENCE"
+    ],
+    "authority": {
+      "requested_by": "founder_via_victor",
+      "supervision_mode": "STRICT",
+      "maximum_level": "L1",
+      "production_activation_authorized": false
+    },
+    "prohibited_actions": [
+      "EXPOSE_OR_ROTATE_SECRETS",
+      "PAID_ACTION",
+      "DESTRUCTIVE_ACTION",
+      "PRODUCTION_DEPLOYMENT",
+      "LOCKED_OBJECTIVE_OR_AUTHORITY_CHANGE"
+    ],
+    "evidence_requirements": [
+      "TASK_RESULT_ENVELOPE",
+      "CHANGED_FILES_OR_PLAN",
+      "TEST_RESULTS",
+      "BLOCKERS"
+    ],
+    "founder_message": "Tony Stark ko RIO workflow governance REPAIR_PLAN task do\nTarget repository: vickykenin-lang/rio-affiliate-engine\nObjective: REPAIR_PLAN for rio.yml and victor-rio-transport.yml permissions, scheduled jobs, git add scope and PARKED-state compliance\nAuthority L1 only\nCode change, deployment, production activation, secret access, paid action aur destructive action prohibited hain"
+  }
+}

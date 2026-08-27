@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "message_type": "TASK_RESULT",
+  "sender": "tony_stark",
+  "recipient": "victor",
+  "task_id": "victor-tony-1787813586268-291",
+  "task_type": "TASK_REQUEST",
+  "observed_at": "2026-08-27T06:53:29.623467+00:00",
+  "execution_status": "ACCEPTED_PENDING_EXECUTION_EVIDENCE",
+  "repair_executed": false,
+  "destructive_action_performed": false,
+  "paid_action_performed": false,
+  "production_action_performed": false,
+  "strict_supervision": {
+    "status": "TASK_ACCEPTED_GOVERNED",
+    "objective_alignment": "CHECKED_AGAINST_LOCKED_OBJECTIVE",
+    "error_or_blocker": null,
+    "root_cause": null,
+    "solution": "Governed task envelope accepted. Only authorized repository work may proceed; production, secrets, paid and destructive actions remain blocked.",
+    "next_action": "VICTOR_REVIEW_AND_PUSH_NEXT_ACTION",
+    "evidence": [
+      "integration/results/tasks/victor-tony-1787813586268-291.json",
+      "OBJECTIVE.md",
+      "SOUL.md",
+      "config/authority.json",
+      "state/current_state.json",
+      "integration/victor_contract.json",
+      "config/authority.json"
+    ],
+    "revert_to_victor": true,
+    "requires_follow_up": true
+  },
+  "task_request": {
+    "schema_version": 1,
+    "objective": "Tony Stark ko governed TASK_REQUEST assign karo. Target repository: vickykenin-lang/rio-affiliate-engine. Objective: read-only repository audit karke technical blockers aur evidence report karo. Authority L0 only. Code change, deployment, secret access, paid action, destructive action aur production activation prohibited hain.",
+    "target_repository": "vickykenin-lang/rio-affiliate-engine.",
+    "requested_actions": [
+      "READ_REPOSITORY",
+      "ANALYZE",
+      "RETURN_EVIDENCE"
+    ],
+    "authority": {
+      "requested_by": "founder_via_victor",
+      "supervision_mode": "STRICT",
+      "maximum_level": "L0",
+      "production_activation_authorized": false
+    },
+    "prohibited_actions": [
+      "EXPOSE_OR_ROTATE_SECRETS",
+      "PAID_ACTION",
+      "DESTRUCTIVE_ACTION",
+      "PRODUCTION_DEPLOYMENT",
+      "LOCKED_OBJECTIVE_OR_AUTHORITY_CHANGE"
+    ],
+    "evidence_requirements": [
+      "TASK_RESULT_ENVELOPE",
+      "CHANGED_FILES_OR_PLAN",
+      "TEST_RESULTS",
+      "BLOCKERS"
+    ],
+    "founder_message": "Tony Stark ko governed TASK_REQUEST assign karo. Target repository: vickykenin-lang/rio-affiliate-engine. Objective: read-only repository audit karke technical blockers aur evidence report karo. Authority L0 only. Code change, deployment, secret access, paid action, destructive action aur production activation prohibited hain."
+  },
+  "payload": {
+    "schema_version": 1,
+    "objective": "Tony Stark ko governed TASK_REQUEST assign karo. Target repository: vickykenin-lang/rio-affiliate-engine. Objective: read-only repository audit karke technical blockers aur evidence report karo. Authority L0 only. Code change, deployment, secret access, paid action, destructive action aur production activation prohibited hain.",
+    "target_repository": "vickykenin-lang/rio-affiliate-engine.",
+    "requested_actions": [
+      "READ_REPOSITORY",
+      "ANALYZE",
+      "RETURN_EVIDENCE"
+    ],
+    "authority": {
+      "requested_by": "founder_via_victor",
+      "supervision_mode": "STRICT",
+      "maximum_level": "L0",
+      "production_activation_authorized": false
+    },
+    "prohibited_actions": [
+      "EXPOSE_OR_ROTATE_SECRETS",
+      "PAID_ACTION",
+      "DESTRUCTIVE_ACTION",
+      "PRODUCTION_DEPLOYMENT",
+      "LOCKED_OBJECTIVE_OR_AUTHORITY_CHANGE"
+    ],
+    "evidence_requirements": [
+      "TASK_RESULT_ENVELOPE",
+      "CHANGED_FILES_OR_PLAN",
+      "TEST_RESULTS",
+      "BLOCKERS"
+    ],
+    "founder_message": "Tony Stark ko governed TASK_REQUEST assign karo. Target repository: vickykenin-lang/rio-affiliate-engine. Objective: read-only repository audit karke technical blockers aur evidence report karo. Authority L0 only. Code change, deployment, secret access, paid action, destructive action aur production activation prohibited hain."
+  }
+}

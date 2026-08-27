@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "message_type": "TASK_RESULT",
+  "sender": "tony_stark",
+  "recipient": "victor",
+  "task_id": "victor-tony-1787810555588-275",
+  "task_type": "STATUS_CHECK",
+  "observed_at": "2026-08-27T06:02:51.620026+00:00",
+  "execution_status": "COMPLETED_DIAGNOSTIC",
+  "repair_executed": false,
+  "destructive_action_performed": false,
+  "paid_action_performed": false,
+  "strict_supervision": {
+    "status": "ONBOARDING_STRICT",
+    "objective_alignment": "CHECKED_AGAINST_LOCKED_OBJECTIVE",
+    "error_or_blocker": null,
+    "root_cause": null,
+    "solution": "No repair is executed unless evidence and authority permit it.",
+    "next_action": "VICTOR_REVIEW_AND_PUSH_NEXT_ACTION",
+    "evidence": [
+      "integration/results/tasks/victor-tony-1787810555588-275.json",
+      "OBJECTIVE.md",
+      "SOUL.md",
+      "config/authority.json",
+      "state/current_state.json"
+    ],
+    "revert_to_victor": true,
+    "requires_follow_up": true
+  },
+  "payload": {
+    "founder_message": "Victor\u2013Tony governed TASK_REQUEST bridge upgrade karo. STATUS_CHECK ke alawa real engineering task payload, scope, authority, prohibited actions, target repository aur evidence return support implement karo. Local tests, CI aur fresh Telegram round-trip evidence ke bina complete claim mat karna.",
+    "requested_by": "victor",
+    "supervision_mode": "STRICT"
+  }
+}

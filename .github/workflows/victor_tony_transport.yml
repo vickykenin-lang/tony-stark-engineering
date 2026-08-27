@@ -57,11 +57,32 @@ jobs:
       TONY_TASK_ID: ${{ inputs.task_id }}
       TONY_TASK_TYPE: ${{ inputs.task_type }}
       TONY_TASK_PAYLOAD: ${{ inputs.payload }}
+      TONY_TARGET_REPO_PATH: ${{ github.workspace }}/_target/rio-affiliate-engine
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Resolve governed target
+        id: target
+        if: inputs.task_type == 'TASK_REQUEST'
+        env:
+          RAW_PAYLOAD: ${{ inputs.payload }}
+        run: |
+          python - <<'PY'
+          import json, os
+          target = json.loads(os.environ["RAW_PAYLOAD"]).get("target_repository", "")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as handle:
+              handle.write(f"repository={target}\n")
+          PY
+      - name: Checkout RIO read-only audit target
+        if: steps.target.outputs.repository == 'vickykenin-lang/rio-affiliate-engine'
+        uses: actions/checkout@v4
+        with:
+          repository: vickykenin-lang/rio-affiliate-engine
+          path: _target/rio-affiliate-engine
+          persist-credentials: false
+          fetch-depth: 1
       - name: Execute governed Tony task
         id: execute_task
         continue-on-error: true
@@ -88,13 +109,18 @@ jobs:
           git config user.name "tony-stark-governed-runtime"
           git config user.email "actions@users.noreply.github.com"
           git add integration/results/tasks/${TONY_TASK_ID}.json
+          if [ -f integration/results/audits/${TONY_TASK_ID}.json ]; then
+            git add integration/results/audits/${TONY_TASK_ID}.json
+          fi
           git diff --cached --quiet && exit 0
           git commit -m "Persist Tony task evidence ${TONY_TASK_ID}"
           git push
       - uses: actions/upload-artifact@v4
         with:
           name: victor-tony-result-${{ inputs.task_id }}
-          path: integration/results/tasks/${{ inputs.task_id }}.json
+          path: |
+            integration/results/tasks/${{ inputs.task_id }}.json
+            integration/results/audits/${{ inputs.task_id }}.json
           if-no-files-found: error
       - name: Preserve fail-closed workflow conclusion
         if: steps.execute_task.outcome == 'failure'

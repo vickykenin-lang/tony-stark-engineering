@@ -53,7 +53,7 @@ def validate_task_request(payload):
     if not isinstance(payload.get("objective"), str) or not payload["objective"].strip():
         errors.append("TASK_OBJECTIVE_REQUIRED")
     target = payload.get("target_repository")
-    if not isinstance(target, str) or not re.fullmatch(r"vickykenin-lang/[A-Za-z0-9._-]+", target):
+    if not isinstance(target, str) or not re.fullmatch(r"vickykenin-lang/[A-Za-z0-9](?:[A-Za-z0-9._-]*[A-Za-z0-9_-])?", target):
         errors.append("TARGET_REPOSITORY_REQUIRED_OR_INVALID")
     actions = payload.get("requested_actions")
     if not isinstance(actions, list) or not actions:

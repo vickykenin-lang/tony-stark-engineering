@@ -42,13 +42,27 @@ class TonyRuntimeTests(unittest.TestCase):
             "evidence_requirements": ["TASK_RESULT_ENVELOPE", "TEST_RESULTS", "BLOCKERS"],
         }
         env = os.environ.copy()
-        env.update({"TONY_TASK_ID": task_id, "TONY_TASK_TYPE": "TASK_REQUEST", "TONY_TASK_PAYLOAD": json.dumps(payload)})
-        result = subprocess.run(["python", "src/tony_runtime.py"], cwd=ROOT, env=env, capture_output=True, text=True)
+        with tempfile.TemporaryDirectory() as folder:
+            target = Path(folder)
+            (target / "README.md").write_text("# RIO fixture\nTODO add tests\n", encoding="utf-8")
+            env.update({
+                "TONY_TASK_ID": task_id,
+                "TONY_TASK_TYPE": "TASK_REQUEST",
+                "TONY_TASK_PAYLOAD": json.dumps(payload),
+                "TONY_TARGET_REPO_PATH": str(target),
+            })
+            result = subprocess.run(["python", "src/tony_runtime.py"], cwd=ROOT, env=env, capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
         data = json.loads((ROOT / f"integration/results/tasks/{task_id}.json").read_text())
-        self.assertEqual(data["execution_status"], "ACCEPTED_PENDING_EXECUTION_EVIDENCE")
+        self.assertEqual(data["execution_status"], "COMPLETED_READ_ONLY_AUDIT")
+        self.assertEqual(data["strict_supervision"]["status"], "READ_ONLY_AUDIT_COMPLETED")
         self.assertFalse(data["production_action_performed"])
+        audit_path = ROOT / f"integration/results/audits/{task_id}.json"
+        audit = json.loads(audit_path.read_text())
+        self.assertEqual(audit["audit_mode"], "L0_READ_ONLY_STATIC")
+        self.assertFalse(audit["repository_change_performed"])
         (ROOT / f"integration/results/tasks/{task_id}.json").unlink()
+        audit_path.unlink()
 
 if __name__ == "__main__":
     unittest.main()

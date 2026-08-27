@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "message_type": "TASK_RESULT",
+  "sender": "tony_stark",
+  "recipient": "victor",
+  "task_id": "victor-tony-1787812258172-282",
+  "task_type": "TASK_REQUEST",
+  "observed_at": "2026-08-27T06:31:13.605424+00:00",
+  "execution_status": "SAFE_STOP",
+  "repair_executed": false,
+  "destructive_action_performed": false,
+  "paid_action_performed": false,
+  "production_action_performed": false,
+  "strict_supervision": {
+    "status": "SAFE_STOP",
+    "objective_alignment": "BLOCKED_CONSTITUTION_INVALID",
+    "error_or_blocker": "TASK_SCHEMA_INVALID;TASK_OBJECTIVE_REQUIRED;TARGET_REPOSITORY_REQUIRED_OR_INVALID;REQUESTED_ACTIONS_REQUIRED;STRICT_AUTHORITY_REQUIRED;MANDATORY_PROHIBITIONS_MISSING;EVIDENCE_REQUIREMENTS_INCOMPLETE",
+    "root_cause": "CONSTITUTIONAL_VALIDATION_FAILED",
+    "solution": "Restore and validate mandatory constitutional binding.",
+    "next_action": "VICTOR_REVIEW_AND_PUSH_NEXT_ACTION",
+    "evidence": [
+      "integration/results/tasks/victor-tony-1787812258172-282.json",
+      "OBJECTIVE.md",
+      "SOUL.md",
+      "config/authority.json",
+      "state/current_state.json",
+      "integration/victor_contract.json",
+      "config/authority.json"
+    ],
+    "revert_to_victor": true,
+    "requires_follow_up": true
+  },
+  "task_request": {
+    "founder_message": "Tony Stark ko governed TASK_REQUEST assign karo. Target repository: vickykenin-lang/rio-affiliate-engine. Objective: read-only repository audit karke technical blockers aur evidence report karo. Authority L0 only. Code change, deployment, secret access, paid action, destructive action aur production activation prohibited hain.",
+    "requested_by": "victor",
+    "supervision_mode": "STRICT"
+  },
+  "payload": {
+    "founder_message": "Tony Stark ko governed TASK_REQUEST assign karo. Target repository: vickykenin-lang/rio-affiliate-engine. Objective: read-only repository audit karke technical blockers aur evidence report karo. Authority L0 only. Code change, deployment, secret access, paid action, destructive action aur production activation prohibited hain.",
+    "requested_by": "victor",
+    "supervision_mode": "STRICT"
+  }
+}

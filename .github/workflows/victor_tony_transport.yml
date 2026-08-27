@@ -17,6 +17,7 @@ on:
           - DIAGNOSTIC
           - REPAIR_PLAN
           - POST_REPAIR_VERIFY
+          - TASK_REQUEST
       payload:
         description: JSON payload
         required: false

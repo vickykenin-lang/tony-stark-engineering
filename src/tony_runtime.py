@@ -6,7 +6,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-ALLOWED = {"STATUS_CHECK", "HEALTH_CHECK", "DIAGNOSTIC", "REPAIR_PLAN", "POST_REPAIR_VERIFY"}
+ALLOWED = {"STATUS_CHECK", "HEALTH_CHECK", "DIAGNOSTIC", "REPAIR_PLAN", "POST_REPAIR_VERIFY", "TASK_REQUEST"}
+MANDATORY_TASK_PROHIBITIONS = {"EXPOSE_OR_ROTATE_SECRETS", "PAID_ACTION", "DESTRUCTIVE_ACTION", "PRODUCTION_DEPLOYMENT", "LOCKED_OBJECTIVE_OR_AUTHORITY_CHANGE"}
 REQUIRED = [
     ROOT / "OBJECTIVE.md",
     ROOT / "SOUL.md",
@@ -44,6 +45,33 @@ def safe_task_id(value):
         raise SystemExit("INVALID_TASK_ID")
     return cleaned
 
+def validate_task_request(payload):
+    errors = []
+    if payload.get("schema_version") != 1:
+        errors.append("TASK_SCHEMA_INVALID")
+    if not isinstance(payload.get("objective"), str) or not payload["objective"].strip():
+        errors.append("TASK_OBJECTIVE_REQUIRED")
+    target = payload.get("target_repository")
+    if not isinstance(target, str) or not re.fullmatch(r"vickykenin-lang/[A-Za-z0-9._-]+", target):
+        errors.append("TARGET_REPOSITORY_REQUIRED_OR_INVALID")
+    actions = payload.get("requested_actions")
+    if not isinstance(actions, list) or not actions:
+        errors.append("REQUESTED_ACTIONS_REQUIRED")
+    authority = payload.get("authority")
+    if not isinstance(authority, dict) or authority.get("supervision_mode") != "STRICT":
+        errors.append("STRICT_AUTHORITY_REQUIRED")
+    elif authority.get("maximum_level") not in {"L0", "L1", "L2"}:
+        errors.append("AUTHORITY_LEVEL_INVALID")
+    elif authority.get("production_activation_authorized") is not False:
+        errors.append("PRODUCTION_GATE_MUST_REMAIN_CLOSED")
+    prohibited = payload.get("prohibited_actions")
+    if not isinstance(prohibited, list) or not MANDATORY_TASK_PROHIBITIONS.issubset(set(prohibited)):
+        errors.append("MANDATORY_PROHIBITIONS_MISSING")
+    evidence = payload.get("evidence_requirements")
+    if not isinstance(evidence, list) or not {"TASK_RESULT_ENVELOPE", "TEST_RESULTS", "BLOCKERS"}.issubset(set(evidence)):
+        errors.append("EVIDENCE_REQUIREMENTS_INCOMPLETE")
+    return errors
+
 def main():
     task_id = safe_task_id(os.getenv("TONY_TASK_ID", "").strip())
     task_type = os.getenv("TONY_TASK_TYPE", "").strip().upper()
@@ -57,12 +85,14 @@ def main():
         raise SystemExit("TASK_PAYLOAD_MUST_BE_OBJECT")
 
     errors = validate_constitution()
+    if task_type == "TASK_REQUEST":
+        errors.extend(validate_task_request(payload))
     now = datetime.now(timezone.utc).isoformat()
     out = ROOT / "integration" / "results" / "tasks" / f"{task_id}.json"
     out.parent.mkdir(parents=True, exist_ok=True)
 
     strict = {
-        "status": "SAFE_STOP" if errors else "ONBOARDING_STRICT",
+        "status": "SAFE_STOP" if errors else ("TASK_ACCEPTED_GOVERNED" if task_type == "TASK_REQUEST" else "ONBOARDING_STRICT"),
         "objective_alignment": "BLOCKED_CONSTITUTION_INVALID" if errors else "CHECKED_AGAINST_LOCKED_OBJECTIVE",
         "error_or_blocker": ";".join(errors) if errors else None,
         "root_cause": "CONSTITUTIONAL_VALIDATION_FAILED" if errors else None,
@@ -74,7 +104,11 @@ def main():
     }
 
     execution_status = "COMPLETED_DIAGNOSTIC"
-    if task_type == "DIAGNOSTIC":
+    if task_type == "TASK_REQUEST":
+        execution_status = "ACCEPTED_PENDING_EXECUTION_EVIDENCE"
+        strict["solution"] = "Governed task envelope accepted. Only authorized repository work may proceed; production, secrets, paid and destructive actions remain blocked."
+        strict["evidence"].extend(["integration/victor_contract.json", "config/authority.json"])
+    elif task_type == "DIAGNOSTIC":
         strict["error_or_blocker"] = strict["error_or_blocker"] or payload.get("error_or_blocker") or "DIAGNOSTIC_INPUT_REQUIRED"
         strict["root_cause"] = strict["root_cause"] or "PENDING_EVIDENCE_BASED_ROOT_CAUSE_ANALYSIS"
         strict["solution"] = "Collect relevant logs/config/runtime evidence, isolate root cause, then propose the least-risk authorized repair."
@@ -97,7 +131,9 @@ def main():
         "repair_executed": False,
         "destructive_action_performed": False,
         "paid_action_performed": False,
+        "production_action_performed": False,
         "strict_supervision": strict,
+        "task_request": payload if task_type == "TASK_REQUEST" else None,
         "payload": payload,
     }
     out.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")

@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "department": "tony_stark",
   "reports_to": "victor",
   "supervision_mode": "STRICT",
@@ -8,7 +8,8 @@
     "HEALTH_CHECK",
     "DIAGNOSTIC",
     "REPAIR_PLAN",
-    "POST_REPAIR_VERIFY"
+    "POST_REPAIR_VERIFY",
+    "TASK_REQUEST"
   ],
   "required_result_fields": [
     "schema_version",
@@ -38,5 +39,14 @@
     "secrets_forbidden": true,
     "live_claim_requires_fresh_verification": true
   },
-  "result_path_pattern": "integration/results/tasks/{task_id}.json"
+  "result_path_pattern": "integration/results/tasks/{task_id}.json",
+  "task_request_required_fields": [
+    "schema_version",
+    "objective",
+    "target_repository",
+    "requested_actions",
+    "authority",
+    "prohibited_actions",
+    "evidence_requirements"
+  ]
 }

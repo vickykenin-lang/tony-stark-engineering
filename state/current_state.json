@@ -1,9 +1,9 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "department": "tony_stark",
-  "state": "ONBOARDING_STRICT",
-  "execution_mode": "DIAGNOSTIC_ONLY",
-  "victor_connection": "BOUND_PENDING_FRESH_ROUND_TRIP",
+  "state": "MANAGED_DIAGNOSTIC",
+  "execution_mode": "VICTOR_SUPERVISED_DIAGNOSTIC",
+  "victor_connection": "VERIFIED",
   "live_certification": "NOT_VERIFIED",
   "business_execution": "BLOCKED_PENDING_CERTIFICATION",
   "current_task": null,
@@ -13,13 +13,24 @@
     "task_id": null
   },
   "last_run_started": null,
-  "last_run_finished": null,
-  "last_verified_evidence": null,
-  "next_valid_action": "RUN_CONSTITUTIONAL_VALIDATION_THEN_FRESH_VICTOR_ROUND_TRIP",
+  "last_run_finished": "2026-08-27T07:00:00Z",
+  "last_verified_evidence": {
+    "communication_task": "victor-tony-1787812427352-285",
+    "rio_audit_task": "victor-tony-1787813824721-294",
+    "repair_plan_task": "victor-tony-1787814095926-300",
+    "qualification": "TASK_REQUEST_AND_L0_AUDIT_AND_L1_PLAN_VERIFIED"
+  },
+  "next_valid_action": "ACCEPT_VICTOR_SUPERVISED_L0_L1_DIAGNOSTIC_TASKS",
   "locked_decisions": [
     "FOUNDER_FINAL_AUTHORITY",
     "STRICT_VICTOR_SUPERVISION",
     "DEPARTMENT_SCOPED_CREDENTIALS",
     "NO_LIVE_CLAIM_WITHOUT_EVIDENCE"
-  ]
+  ],
+  "certification": {
+    "level": "MANAGED_DIAGNOSTIC",
+    "authorized_by": "Founder Vicky Gautam",
+    "authorized_at": "2026-08-27",
+    "live_certified": false
+  }
 }

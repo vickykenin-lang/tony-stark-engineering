@@ -47,10 +47,10 @@ jobs:
           python-version: '3.12'
       - name: Run constitutional tests
         run: python -m unittest discover -s tests -v
-      - name: Verify OpenAI credential
+      - name: Verify AWS Bedrock credential
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python src/openai_health.py
+          AWS_BEDROCK_API_KEY: ${{ secrets.AWS_BEDROCK_API_KEY }}
+        run: python src/bedrock_health.py
       - name: Persist AI health evidence
         if: always()
         run: |

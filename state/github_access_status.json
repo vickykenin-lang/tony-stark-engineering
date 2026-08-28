@@ -1,0 +1,12 @@
+{
+  "checked_at_utc": "2026-08-28T05:12:12+00:00",
+  "department": "tony_stark",
+  "access": {
+    "health": "HEALTHY",
+    "target": "vickykenin-lang/rio-affiliate-engine",
+    "read": true,
+    "push": true
+  },
+  "credential_value_stored": false,
+  "cross_repo_repair_ready": true
+}

@@ -1,0 +1,46 @@
+name: Tony Autonomous Heartbeat
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/autonomous_cycle.py'
+      - 'tests/test_autonomous_cycle.py'
+      - '.github/workflows/tony_autonomous_heartbeat.yml'
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tony-autonomous-heartbeat
+  cancel-in-progress: false
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      AWS_BEDROCK_API_KEY: ${{ secrets.AWS_BEDROCK_API_KEY }}
+      TONY_GITHUB_TOKEN: ${{ secrets.TONY_GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run autonomy tests
+        run: python -m unittest discover -s tests -v
+      - name: Run autonomous diagnostic cycle
+        run: python src/autonomous_cycle.py
+      - name: Persist cycle evidence
+        if: always()
+        run: |
+          git config user.name "tony-stark-autonomy"
+          git config user.email "actions@users.noreply.github.com"
+          git add state/autonomy_status.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Persist Tony autonomous heartbeat evidence"
+          git pull --rebase --autostash
+          git push

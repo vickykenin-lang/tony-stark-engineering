@@ -52,12 +52,16 @@ jobs:
         env:
           AWS_BEDROCK_API_KEY: ${{ secrets.AWS_BEDROCK_API_KEY }}
         run: python src/bedrock_health.py
+      - name: Verify Tony cross-repository access
+        env:
+          TONY_GITHUB_TOKEN: ${{ secrets.TONY_GITHUB_TOKEN }}
+        run: python src/github_access_health.py
       - name: Persist AI health evidence
         if: always()
         run: |
           git config user.name "tony-stark-governed-runtime"
           git config user.email "actions@users.noreply.github.com"
-          git add state/ai_runtime_status.json
+          git add state/ai_runtime_status.json state/github_access_status.json
           git diff --cached --quiet && exit 0
           git commit -m "Persist Tony AI runtime health"
           git pull --rebase --autostash

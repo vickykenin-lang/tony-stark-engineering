@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "department": "tony_stark",
+  "mode": "GOVERNED_SELF_MODE",
+  "authority": "VICTOR_POLICY_UNDER_FOUNDER_SELF_MODE_DECISION",
+  "auto_authorized": [
+    "READ_REPOSITORY_AND_ACTIONS_EVIDENCE",
+    "DIAGNOSE_FAILED_WORKFLOW",
+    "RERUN_FAILED_JOBS",
+    "RUN_SAFE_TESTS",
+    "PREPARE_REPAIR_PLAN"
+  ],
+  "victor_policy_evaluation_required": [
+    "CODE_CHANGE",
+    "WORKFLOW_CHANGE",
+    "MERGE_OR_DIRECT_PUSH_TO_TARGET"
+  ],
+  "founder_only": [
+    "CREDENTIAL_ADMINISTRATION",
+    "DESTRUCTIVE_ACTION",
+    "PAID_SERVICE_ENABLEMENT",
+    "SECURITY_POLICY_EXCEPTION"
+  ],
+  "hard_rules": {
+    "tests_required_before_target_write": true,
+    "failed_tests_block_write": true,
+    "evidence_required": true,
+    "no_secret_exposure": true
+  }
+}

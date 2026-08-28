@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "department": "tony_stark",
-  "state": "MANAGED_DIAGNOSTIC",
-  "execution_mode": "VICTOR_SUPERVISED_DIAGNOSTIC",
+  "state": "DIAGNOSTIC_READY_MANAGED",
+  "execution_mode": "AUTONOMOUS_DIAGNOSTIC_VICTOR_GATED_REPAIR",
   "victor_connection": "VERIFIED",
   "live_certification": "NOT_VERIFIED",
   "business_execution": "BLOCKED_PENDING_CERTIFICATION",
@@ -20,7 +20,7 @@
     "repair_plan_task": "victor-tony-1787814095926-300",
     "qualification": "TASK_REQUEST_AND_L0_AUDIT_AND_L1_PLAN_VERIFIED"
   },
-  "next_valid_action": "ACCEPT_VICTOR_SUPERVISED_L0_L1_DIAGNOSTIC_TASKS",
+  "next_valid_action": "RUN_AUTONOMOUS_HEARTBEAT_AND_ACCEPT_VICTOR_AUTHORIZED_REPAIR",
   "locked_decisions": [
     "FOUNDER_FINAL_AUTHORITY",
     "STRICT_VICTOR_SUPERVISION",
@@ -28,7 +28,7 @@
     "NO_LIVE_CLAIM_WITHOUT_EVIDENCE"
   ],
   "certification": {
-    "level": "MANAGED_DIAGNOSTIC",
+    "level": "DIAGNOSTIC_READY_MANAGED",
     "authorized_by": "Founder Vicky Gautam",
     "authorized_at": "2026-08-27",
     "live_certified": false

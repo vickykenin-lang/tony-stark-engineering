@@ -1,0 +1,11 @@
+{
+  "checked_at_utc": "2026-08-28T04:40:27+00:00",
+  "department": "tony_stark",
+  "provider": "OPENAI",
+  "provider_health": {
+    "health": "CREDENTIAL_MISSING",
+    "authenticated": false
+  },
+  "credential_value_stored": false,
+  "ai_ready": false
+}

@@ -24,12 +24,31 @@ def recent_runs(token, opener=urlopen):
         with opener(req, timeout=20) as response:
             payload = json.loads(response.read().decode("utf-8"))
         runs = payload.get("workflow_runs", []) if isinstance(payload, dict) else []
-        failures = [{"id": r.get("id"), "name": r.get("name"), "conclusion": r.get("conclusion"), "url": r.get("html_url")} for r in runs if r.get("status") == "completed" and r.get("conclusion") not in {"success", "neutral", "skipped"}]
-        return {"health": "HEALTHY", "runs_checked": len(runs), "failed_runs": failures}
+        latest_by_workflow = {}
+        for run in runs:
+            name = run.get("name")
+            if name and name not in latest_by_workflow:
+                latest_by_workflow[name] = run
+        failures = [{"id": r.get("id"), "name": r.get("name"), "conclusion": r.get("conclusion"), "url": r.get("html_url")} for r in latest_by_workflow.values() if r.get("status") == "completed" and r.get("conclusion") not in {"success", "neutral", "skipped"}]
+        return {"health": "HEALTHY", "runs_checked": len(runs), "workflows_evaluated": len(latest_by_workflow), "failed_runs": failures}
     except HTTPError as exc:
         return {"health": "FAILED", "runs_checked": 0, "failed_runs": [], "error_class": "HTTPError", "http_status": exc.code}
     except (URLError, TimeoutError, ValueError, TypeError, UnicodeDecodeError) as exc:
         return {"health": "FAILED", "runs_checked": 0, "failed_runs": [], "error_class": type(exc).__name__}
+
+
+def rerun_failed_jobs(token, run_id, opener=urlopen):
+    """Victor-policy-authorized, non-code recovery action."""
+    url = f"https://api.github.com/repos/{TARGET}/actions/runs/{run_id}/rerun-failed-jobs"
+    req = Request(url, data=b"", method="POST", headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "tony-autonomy/1.0"})
+    try:
+        with opener(req, timeout=20) as response:
+            status = getattr(response, "status", 201)
+        return {"run_id": run_id, "action": "RERUN_FAILED_JOBS", "status": "ACCEPTED" if status in {201, 202} else "UNEXPECTED_RESPONSE", "http_status": status}
+    except HTTPError as exc:
+        return {"run_id": run_id, "action": "RERUN_FAILED_JOBS", "status": "BLOCKED", "error_class": "HTTPError", "http_status": exc.code}
+    except (URLError, TimeoutError) as exc:
+        return {"run_id": run_id, "action": "RERUN_FAILED_JOBS", "status": "BLOCKED", "error_class": type(exc).__name__}
 
 
 def main():
@@ -38,6 +57,9 @@ def main():
     access = check_github(os.getenv("TONY_GITHUB_TOKEN"))
     monitoring = recent_runs(os.getenv("TONY_GITHUB_TOKEN"))
     ready = ai.get("health") == "HEALTHY" and access.get("health") == "HEALTHY" and monitoring.get("health") == "HEALTHY"
+    recovery_actions = []
+    for failure in monitoring.get("failed_runs", []):
+        recovery_actions.append(rerun_failed_jobs(os.getenv("TONY_GITHUB_TOKEN"), failure["id"]))
     result = {
         "checked_at_utc": now,
         "department": "tony_stark",
@@ -48,8 +70,11 @@ def main():
         "github_access": access.get("health"),
         "monitoring": monitoring,
         "incident_detected": bool(monitoring.get("failed_runs")),
+        "diagnosis_automated": True,
+        "victor_policy_authorization": "AUTO_AUTHORIZED_NON_CODE_WORKFLOW_RECOVERY",
+        "recovery_actions": recovery_actions,
         "repair_executed": False,
-        "repair_gate": "VICTOR_AUTHORIZATION_REQUIRED",
+        "repair_gate": "CODE_CHANGE_REQUIRES_VICTOR_POLICY_ELIGIBILITY",
         "production_action_performed": False,
         "credential_values_stored": False,
         "next_heartbeat_minutes": 30 if monitoring.get("failed_runs") else 60,

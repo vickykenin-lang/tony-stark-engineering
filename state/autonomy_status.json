@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-08-28T05:53:13+00:00",
+  "checked_at_utc": "2026-08-30T12:52:47+00:00",
   "department": "tony_stark",
   "mode": "DIAGNOSTIC_READY_MANAGED",
   "cycle": "WAKE_VALIDATE_MONITOR_DIAGNOSE_REPORT",
@@ -9,25 +9,16 @@
   "monitoring": {
     "health": "HEALTHY",
     "runs_checked": 10,
-    "failed_runs": [
-      {
-        "id": 33113288053,
-        "name": "Deploy RIO to GitHub Pages",
-        "conclusion": "failure",
-        "url": "https://github.com/vickykenin-lang/rio-affiliate-engine/actions/runs/33113288053"
-      },
-      {
-        "id": 33113287922,
-        "name": "RIO",
-        "conclusion": "failure",
-        "url": "https://github.com/vickykenin-lang/rio-affiliate-engine/actions/runs/33113287922"
-      }
-    ]
+    "workflows_evaluated": 3,
+    "failed_runs": []
   },
-  "incident_detected": true,
+  "incident_detected": false,
+  "diagnosis_automated": true,
+  "victor_policy_authorization": "AUTO_AUTHORIZED_NON_CODE_WORKFLOW_RECOVERY",
+  "recovery_actions": [],
   "repair_executed": false,
-  "repair_gate": "VICTOR_AUTHORIZATION_REQUIRED",
+  "repair_gate": "CODE_CHANGE_REQUIRES_VICTOR_POLICY_ELIGIBILITY",
   "production_action_performed": false,
   "credential_values_stored": false,
-  "next_heartbeat_minutes": 30
+  "next_heartbeat_minutes": 60
 }

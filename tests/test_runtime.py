@@ -16,10 +16,12 @@ class TonyRuntimeTests(unittest.TestCase):
         state = json.loads((ROOT / "state/current_state.json").read_text())
         self.assertEqual(authority["default"], "PROHIBITED_UNLESS_EXPLICITLY_LISTED")
         self.assertEqual(state["business_execution"], "BLOCKED_PENDING_CERTIFICATION")
-        self.assertEqual(state["state"], "MANAGED_DIAGNOSTIC")
-        self.assertEqual(state["execution_mode"], "VICTOR_SUPERVISED_DIAGNOSTIC")
+        self.assertEqual(state["state"], "DIAGNOSTIC_READY_MANAGED")
+        self.assertEqual(state["execution_mode"], "AUTONOMOUS_DIAGNOSTIC_VICTOR_GATED_REPAIR")
         self.assertEqual(state["victor_connection"], "VERIFIED")
         self.assertEqual(state["live_certification"], "NOT_VERIFIED")
+        self.assertEqual(state["certification"]["level"], "DIAGNOSTIC_READY_MANAGED")
+        self.assertFalse(state["certification"]["live_certified"])
 
     def test_status_check_returns_strict_revert(self):
         task_id = "test-strict-roundtrip"

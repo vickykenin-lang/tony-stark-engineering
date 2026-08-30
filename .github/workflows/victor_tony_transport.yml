@@ -43,6 +43,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -64,8 +66,20 @@ jobs:
           git add state/ai_runtime_status.json state/github_access_status.json
           git diff --cached --quiet && exit 0
           git commit -m "Persist Tony AI runtime health"
-          git pull --rebase --autostash
-          git push
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              sleep $((attempt*2))
+              continue
+            fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt*2))
+          done
+          echo "Failed to persist Tony AI health after concurrency retries"
+          exit 1
 
   execute:
     if: github.event_name == 'workflow_dispatch'
@@ -79,6 +93,8 @@ jobs:
       TONY_TARGET_REPO_PATH: ${{ github.workspace }}/_target/rio-affiliate-engine
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -136,7 +152,21 @@ jobs:
           fi
           git diff --cached --quiet && exit 0
           git commit -m "Persist Tony task evidence ${TONY_TASK_ID}"
-          git push
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              sleep $((attempt*2))
+              continue
+            fi
+            if git push origin HEAD:main; then
+              echo "Tony task evidence persisted"
+              exit 0
+            fi
+            sleep $((attempt*2))
+          done
+          echo "Failed to persist Tony task evidence after concurrency retries"
+          exit 1
       - uses: actions/upload-artifact@v4
         with:
           name: victor-tony-result-${{ inputs.task_id }}

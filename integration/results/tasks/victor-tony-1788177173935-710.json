@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "message_type": "TASK_RESULT",
+  "sender": "tony_stark",
+  "recipient": "victor",
+  "task_id": "victor-tony-1788177173935-710",
+  "task_type": "REPAIR_PLAN",
+  "observed_at": "2026-08-31T11:53:11.097512+00:00",
+  "execution_status": "REPAIR_PLAN_READY",
+  "repair_executed": false,
+  "destructive_action_performed": false,
+  "paid_action_performed": false,
+  "production_action_performed": false,
+  "strict_supervision": {
+    "status": "ONBOARDING_STRICT",
+    "objective_alignment": "CHECKED_AGAINST_LOCKED_OBJECTIVE",
+    "error_or_blocker": null,
+    "root_cause": null,
+    "solution": "Prepare governed repair plan only; execution authority must be evaluated separately.",
+    "next_action": "VICTOR_REVIEW_AND_PUSH_NEXT_ACTION",
+    "evidence": [
+      "integration/results/tasks/victor-tony-1788177173935-710.json",
+      "OBJECTIVE.md",
+      "SOUL.md",
+      "config/authority.json",
+      "state/current_state.json"
+    ],
+    "revert_to_victor": true,
+    "requires_follow_up": true
+  },
+  "task_request": null,
+  "payload": {
+    "founder_message": "AURA3 ka diagnosis: CONNECTED_VERIFIED aur LIVE_CERTIFIED hai, business execution enabled hai.  \nRuntime evidence abhi tak koi final business outcome ya verified revenue nahi dikhata.  \nTony Stark MANAGED_DIAGNOSTIC hai \u2014 agar koi technical blocker hai, use diagnose karke solution suggest kar sakta hai.\n\nCheck karo problem or complete run karo",
+    "requested_by": "victor",
+    "supervision_mode": "STRICT"
+  }
+}

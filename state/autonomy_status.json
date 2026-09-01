@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-09-01T18:49:42+00:00",
+  "checked_at_utc": "2026-09-01T21:46:13+00:00",
   "department": "tony_stark",
   "mode": "DIAGNOSTIC_READY_MANAGED",
   "cycle": "WAKE_VALIDATE_MONITOR_DIAGNOSE_REPORT",
@@ -12,12 +12,6 @@
     "workflows_evaluated": 4,
     "failed_runs": [
       {
-        "id": 33537483192,
-        "name": "RIO",
-        "conclusion": "failure",
-        "url": "https://github.com/vickykenin-lang/rio-affiliate-engine/actions/runs/33537483192"
-      },
-      {
         "id": 33537251039,
         "name": "Victor RIO Governed Transport",
         "conclusion": "failure",
@@ -29,13 +23,6 @@
   "diagnosis_automated": true,
   "victor_policy_authorization": "AUTO_AUTHORIZED_NON_CODE_WORKFLOW_RECOVERY",
   "recovery_actions": [
-    {
-      "run_id": 33537483192,
-      "action": "RERUN_FAILED_JOBS",
-      "status": "BLOCKED",
-      "error_class": "HTTPError",
-      "http_status": 403
-    },
     {
       "run_id": 33537251039,
       "action": "RERUN_FAILED_JOBS",

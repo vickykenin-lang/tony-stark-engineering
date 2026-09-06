@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "task_id": "victor-tony-1788697868571-goal-auto",
+  "audit_mode": "L0_READ_ONLY_STATIC",
+  "target_repository": "vickykenin-lang/rio-affiliate-engine",
+  "file_count": 525,
+  "extension_counts": {
+    ".css": 2,
+    ".csv": 12,
+    ".html": 42,
+    ".js": 1,
+    ".json": 290,
+    ".jsonl": 1,
+    ".md": 106,
+    ".png": 17,
+    ".py": 37,
+    ".txt": 4,
+    ".xml": 1,
+    ".yml": 11,
+    "<none>": 1
+  },
+  "workflow_files": [
+    ".github/workflows/affiliate-attribution.yml",
+    ".github/workflows/apply-emergency-pause-guard.yml",
+    ".github/workflows/apply-telemetry-guard.yml",
+    ".github/workflows/deploy-pages.yml",
+    ".github/workflows/rio.yml",
+    ".github/workflows/telemetry-control-room.yml",
+    ".github/workflows/victor-rio-transport.yml",
+    ".github/workflows/victor_goal_bridge_trial.yml"
+  ],
+  "test_files_detected": [
+    "tests/test_economics.py",
+    "tests/test_telegram_management_reply.py",
+    "tests/test_workflow_governance.py"
+  ],
+  "unresolved_markers": [],
+  "write_enabled_workflows": [
+    ".github/workflows/apply-telemetry-guard.yml",
+    ".github/workflows/telemetry-control-room.yml",
+    ".github/workflows/victor_goal_bridge_trial.yml",
+    ".github/workflows/affiliate-attribution.yml",
+    ".github/workflows/rio.yml",
+    ".github/workflows/apply-emergency-pause-guard.yml",
+    ".github/workflows/victor-rio-transport.yml"
+  ],
+  "findings": [
+    {
+      "severity": "REVIEW",
+      "code": "WRITE_ENABLED_WORKFLOWS",
+      "detail": "7 workflow(s) request contents write; authority review required."
+    }
+  ],
+  "root_cause": "WRITE_ENABLED_WORKFLOWS",
+  "summary": "RIO read-only static audit completed: 1 finding(s), 525 files inspected. No repository file was changed and no code was executed.",
+  "evidence_files": [
+    "README.md",
+    ".github/workflows/affiliate-attribution.yml",
+    ".github/workflows/apply-emergency-pause-guard.yml",
+    ".github/workflows/apply-telemetry-guard.yml",
+    ".github/workflows/deploy-pages.yml",
+    ".github/workflows/rio.yml",
+    ".github/workflows/telemetry-control-room.yml",
+    ".github/workflows/victor-rio-transport.yml",
+    ".github/workflows/victor_goal_bridge_trial.yml",
+    "tests/test_economics.py",
+    "tests/test_telegram_management_reply.py",
+    "tests/test_workflow_governance.py"
+  ],
+  "repository_change_performed": false,
+  "code_execution_performed": false,
+  "secret_access_performed": false,
+  "production_action_performed": false
+}

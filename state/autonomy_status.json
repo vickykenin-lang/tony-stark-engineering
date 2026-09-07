@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-09-07T10:16:32+00:00",
+  "checked_at_utc": "2026-09-07T13:00:19+00:00",
   "department": "tony_stark",
   "mode": "DIAGNOSTIC_READY_MANAGED",
   "cycle": "WAKE_VALIDATE_MONITOR_DIAGNOSE_REPORT",
@@ -10,30 +10,15 @@
     "health": "HEALTHY",
     "runs_checked": 10,
     "workflows_evaluated": 2,
-    "failed_runs": [
-      {
-        "id": 34108119227,
-        "name": "RIO",
-        "conclusion": "failure",
-        "url": "https://github.com/vickykenin-lang/rio-affiliate-engine/actions/runs/34108119227"
-      }
-    ]
+    "failed_runs": []
   },
-  "incident_detected": true,
+  "incident_detected": false,
   "diagnosis_automated": true,
   "victor_policy_authorization": "AUTO_AUTHORIZED_NON_CODE_WORKFLOW_RECOVERY",
-  "recovery_actions": [
-    {
-      "run_id": 34108119227,
-      "action": "RERUN_FAILED_JOBS",
-      "status": "BLOCKED",
-      "error_class": "HTTPError",
-      "http_status": 403
-    }
-  ],
+  "recovery_actions": [],
   "repair_executed": false,
   "repair_gate": "CODE_CHANGE_REQUIRES_VICTOR_POLICY_ELIGIBILITY",
   "production_action_performed": false,
   "credential_values_stored": false,
-  "next_heartbeat_minutes": 30
+  "next_heartbeat_minutes": 60
 }

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-09-12T10:44:36+00:00",
+  "checked_at_utc": "2026-09-12T13:08:45+00:00",
   "department": "tony_stark",
   "mode": "DIAGNOSTIC_READY_MANAGED",
   "cycle": "WAKE_VALIDATE_MONITOR_DIAGNOSE_REPORT",
@@ -9,13 +9,19 @@
   "monitoring": {
     "health": "HEALTHY",
     "runs_checked": 10,
-    "workflows_evaluated": 2,
+    "workflows_evaluated": 3,
     "failed_runs": [
       {
-        "id": 34685939724,
+        "id": 34693499548,
         "name": "RIO",
         "conclusion": "failure",
-        "url": "https://github.com/vickykenin-lang/rio-affiliate-engine/actions/runs/34685939724"
+        "url": "https://github.com/vickykenin-lang/rio-affiliate-engine/actions/runs/34693499548"
+      },
+      {
+        "id": 34689829861,
+        "name": "Deploy RIO to GitHub Pages",
+        "conclusion": "failure",
+        "url": "https://github.com/vickykenin-lang/rio-affiliate-engine/actions/runs/34689829861"
       }
     ]
   },
@@ -24,7 +30,14 @@
   "victor_policy_authorization": "AUTO_AUTHORIZED_NON_CODE_WORKFLOW_RECOVERY",
   "recovery_actions": [
     {
-      "run_id": 34685939724,
+      "run_id": 34693499548,
+      "action": "RERUN_FAILED_JOBS",
+      "status": "BLOCKED",
+      "error_class": "HTTPError",
+      "http_status": 403
+    },
+    {
+      "run_id": 34689829861,
       "action": "RERUN_FAILED_JOBS",
       "status": "BLOCKED",
       "error_class": "HTTPError",

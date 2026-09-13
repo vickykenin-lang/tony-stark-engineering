@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-09-13T00:01:51+00:00",
+  "checked_at_utc": "2026-09-13T01:24:44+00:00",
   "department": "tony_stark",
   "mode": "DIAGNOSTIC_READY_MANAGED",
   "cycle": "WAKE_VALIDATE_MONITOR_DIAGNOSE_REPORT",
@@ -9,7 +9,7 @@
   "monitoring": {
     "health": "HEALTHY",
     "runs_checked": 10,
-    "workflows_evaluated": 5,
+    "workflows_evaluated": 4,
     "failed_runs": [
       {
         "id": 34712294888,

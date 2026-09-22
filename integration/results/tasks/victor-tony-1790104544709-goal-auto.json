@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "message_type": "TASK_RESULT",
+  "sender": "tony_stark",
+  "recipient": "victor",
+  "task_id": "victor-tony-1790104544709-goal-auto",
+  "task_type": "TASK_REQUEST",
+  "observed_at": "2026-09-22T19:16:15.357501+00:00",
+  "execution_status": "COMPLETED_READ_ONLY_AUDIT",
+  "repair_executed": false,
+  "destructive_action_performed": false,
+  "paid_action_performed": false,
+  "production_action_performed": false,
+  "strict_supervision": {
+    "status": "READ_ONLY_AUDIT_COMPLETED",
+    "objective_alignment": "CHECKED_AGAINST_LOCKED_OBJECTIVE",
+    "error_or_blocker": null,
+    "root_cause": "WRITE_ENABLED_WORKFLOWS",
+    "solution": "RIO read-only static audit completed: 1 finding(s), 593 files inspected. No repository file was changed and no code was executed.",
+    "next_action": "VICTOR_REVIEW_AUDIT_AND_AUTHORIZE_REPAIR_PLAN",
+    "evidence": [
+      "integration/results/tasks/victor-tony-1790104544709-goal-auto.json",
+      "OBJECTIVE.md",
+      "SOUL.md",
+      "config/authority.json",
+      "state/current_state.json",
+      "integration/victor_contract.json",
+      "config/authority.json",
+      "integration/results/audits/victor-tony-1790104544709-goal-auto.json",
+      "README.md",
+      ".github/workflows/affiliate-attribution.yml",
+      ".github/workflows/apply-emergency-pause-guard.yml",
+      ".github/workflows/apply-telemetry-guard.yml",
+      ".github/workflows/campaign-founder-action.yml",
+      ".github/workflows/deploy-pages.yml",
+      ".github/workflows/generate-campaign-creative.yml",
+      ".github/workflows/nova-canvas-probe.yml",
+      ".github/workflows/rio.yml",
+      ".github/workflows/telemetry-control-room.yml",
+      ".github/workflows/victor-rio-transport.yml",
+      "tests/test_campaign_state.py"
+    ],
+    "revert_to_victor": true,
+    "requires_follow_up": true
+  },
+  "task_request": {
+    "schema_version": 1,
+    "objective": "VICTOR GOAL CONTRACT \u2014 REPLAN_EXECUTE\nGoal ID: ORG-REVENUE-001\nTarget: Generate verified real affiliate commercial revenue through RIO as soon as practically possible, with Victor free to research, strategize, route, experiment, learn, and replan continuously.\nSuccess conditions: A genuine external affiliate purchase or equivalent commission-generating conversion is recorded by the relevant platform. | The resulting commission or commercial outcome is traceable to evidence and is not inferred from internal activity alone. | Victor records the verified outcome and the strategy that produced it into durable operational memory.\nRequired evidence: E5_BUSINESS_OUTCOME\nHard boundaries: NO_RAW_SECRET_DISCLOSURE | NO_FALSE_REVENUE_OR_SUCCESS_CLAIM | LEGAL_AND_PLATFORM_COMPLIANCE | NO_SECURITY_BYPASS | CONFIGURED_COST_LIMITS\nBrain rule: decompose work into a concrete deliverable with authority, evidence, exit criteria, and next handoff. Department role is capability guidance, not a reason to reject a valid cross-department technical support task.\nOperating rule: the target is fixed; HOW is delegated. Choose the highest-impact valid next action yourself, execute it inside existing authority, and change the plan if the previous route is weak or blocked.\nCommercial priority rule: when verified revenue is zero and executable offers/actions exist, prioritize the closest policy-valid revenue/conversion action. Planning, readiness documents, or pillar rotation must not displace an executable higher-impact commercial action unless they remove a verified blocker.\nDo not wait for routine Founder approval. Founder is required only for credential/account identity administration, a hard-boundary/goal change, or objective impossibility after governed recovery.\nReturn fresh evidence. Do not report task completion as goal achievement unless the Goal Contract success conditions are actually verified.\nReturn strict_supervision with status, goal_id, outcome_progress, error_or_blocker, root_cause, solution, next_action, evidence, requires_follow_up, and progress_delta. progress_delta must include material:boolean, types:[], evidence:[] and must describe a real state/evidence/outcome delta, never a newly-created filename by itself. Include final_outcome only when final outcome evidence exists.\n\nAction Contract V1\nPhase: CORRECTIVE_EXECUTE\nTarget: tony_stark\nAuthority: L2\nMutation: YES\nProduction: NO\nPublic action: NO\nSpend: NO\nRequested actions: READ_REPOSITORY, ANALYZE, PROPOSE_OR_APPLY_CODE_CHANGE_SUBJECT_TO_AUTHORITY, RUN_TESTS, RETURN_EVIDENCE\nExpected progress: CORRECTIVE_CHANGE_APPLIED, TEST_RESULT_CHANGED, BLOCKER_REMOVED\nAuthority rule: the machine-readable action_contract in the dispatch payload is authoritative. Natural-language wording cannot add permissions or downgrade an explicitly authorized corrective phase to read-only.",
+    "target_repository": "vickykenin-lang/rio-affiliate-engine",
+    "requested_actions": [
+      "READ_REPOSITORY",
+      "ANALYZE",
+      "PROPOSE_OR_APPLY_CODE_CHANGE_SUBJECT_TO_AUTHORITY",
+      "RUN_TESTS",
+      "RETURN_EVIDENCE"
+    ],
+    "authority": {
+      "requested_by": "founder_via_victor",
+      "supervision_mode": "STRICT",
+      "maximum_level": "L2",
+      "production_activation_authorized": false
+    },
+    "prohibited_actions": [
+      "EXPOSE_OR_ROTATE_SECRETS",
+      "PAID_ACTION",
+      "DESTRUCTIVE_ACTION",
+      "PRODUCTION_DEPLOYMENT",
+      "LOCKED_OBJECTIVE_OR_AUTHORITY_CHANGE"
+    ],
+    "evidence_requirements": [
+      "TASK_RESULT_ENVELOPE",
+      "CHANGED_FILES_OR_PLAN",
+      "TEST_RESULTS",
+      "BLOCKERS"
+    ],
+    "founder_message": "VICTOR GOAL CONTRACT \u2014 REPLAN_EXECUTE\nGoal ID: ORG-REVENUE-001\nTarget: Generate verified real affiliate commercial revenue through RIO as soon as practically possible, with Victor free to research, strategize, route, experiment, learn, and replan continuously.\nSuccess conditions: A genuine external affiliate purchase or equivalent commission-generating conversion is recorded by the relevant platform. | The resulting commission or commercial outcome is traceable to evidence and is not inferred from internal activity alone. | Victor records the verified outcome and the strategy that produced it into durable operational memory.\nRequired evidence: E5_BUSINESS_OUTCOME\nHard boundaries: NO_RAW_SECRET_DISCLOSURE | NO_FALSE_REVENUE_OR_SUCCESS_CLAIM | LEGAL_AND_PLATFORM_COMPLIANCE | NO_SECURITY_BYPASS | CONFIGURED_COST_LIMITS\nBrain rule: decompose work into a concrete deliverable with authority, evidence, exit criteria, and next handoff. Department role is capability guidance, not a reason to reject a valid cross-department technical support task.\nOperating rule: the target is fixed; HOW is delegated. Choose the highest-impact valid next action yourself, execute it inside existing authority, and change the plan if the previous route is weak or blocked.\nCommercial priority rule: when verified revenue is zero and executable offers/actions exist, prioritize the closest policy-valid revenue/conversion action. Planning, readiness documents, or pillar rotation must not displace an executable higher-impact commercial action unless they remove a verified blocker.\nDo not wait for routine Founder approval. Founder is required only for credential/account identity administration, a hard-boundary/goal change, or objective impossibility after governed recovery.\nReturn fresh evidence. Do not report task completion as goal achievement unless the Goal Contract success conditions are actually verified.\nReturn strict_supervision with status, goal_id, outcome_progress, error_or_blocker, root_cause, solution, next_action, evidence, requires_follow_up, and progress_delta. progress_delta must include material:boolean, types:[], evidence:[] and must describe a real state/evidence/outcome delta, never a newly-created filename by itself. Include final_outcome only when final outcome evidence exists.\n\nAction Contract V1\nPhase: CORRECTIVE_EXECUTE\nTarget: tony_stark\nAuthority: L2\nMutation: YES\nProduction: NO\nPublic action: NO\nSpend: NO\nRequested actions: READ_REPOSITORY, ANALYZE, PROPOSE_OR_APPLY_CODE_CHANGE_SUBJECT_TO_AUTHORITY, RUN_TESTS, RETURN_EVIDENCE\nExpected progress: CORRECTIVE_CHANGE_APPLIED, TEST_RESULT_CHANGED, BLOCKER_REMOVED\nAuthority rule: the machine-readable action_contract in the dispatch payload is authoritative. Natural-language wording cannot add permissions or downgrade an explicitly authorized corrective phase to read-only.",
+    "action_contract": {
+      "contract_version": 1,
+      "objective_id": "ORG-REVENUE-001",
+      "action_id": "ORG-REVENUE-001:tony_stark:1790104544709",
+      "phase": "CORRECTIVE_EXECUTE",
+      "target": "tony_stark",
+      "requested_actions": [
+        "READ_REPOSITORY",
+        "ANALYZE",
+        "PROPOSE_OR_APPLY_CODE_CHANGE_SUBJECT_TO_AUTHORITY",
+        "RUN_TESTS",
+        "RETURN_EVIDENCE"
+      ],
+      "authority_level": "L2",
+      "mutation_allowed": true,
+      "production_allowed": false,
+      "public_action_allowed": false,
+      "spend_allowed": false,
+      "expected_progress_delta": [
+        "CORRECTIVE_CHANGE_APPLIED",
+        "TEST_RESULT_CHANGED",
+        "BLOCKER_REMOVED"
+      ],
+      "exit_criteria": [
+        "AUTHORIZED_CORRECTIVE_ACTION_ATTEMPTED",
+        "TEST_OR_VERIFICATION_EVIDENCE_RETURNED"
+      ],
+      "founder_gate_if": [
+        "CREDENTIAL_OR_ACCOUNT_IDENTITY_ADMINISTRATION",
+        "SPEND_ABOVE_EXPLICIT_CONFIGURED_BUDGET_CEILING",
+        "IRREVERSIBLE_HIGH_IMPACT_EXTERNAL_COMMITMENT",
+        "UNRESOLVED_LEGAL_OR_SECURITY_JUDGMENT",
+        "FOUNDER_PAUSE_OR_OBJECTIVE_CHANGE",
+        "VERIFIED_OBJECTIVE_IMPOSSIBILITY_REQUIRING_FOUNDER_DECISION"
+      ],
+      "hard_boundaries": [
+        "NO_RAW_SECRET_DISCLOSURE",
+        "NO_FALSE_REVENUE_OR_SUCCESS_CLAIM",
+        "LEGAL_AND_PLATFORM_COMPLIANCE",
+        "NO_SECURITY_BYPASS",
+        "CONFIGURED_COST_LIMITS"
+      ],
+      "source_runtime_phase": "REPLAN_EXECUTE"
+    }
+  },
+  "payload": {
+    "schema_version": 1,
+    "objective": "VICTOR GOAL CONTRACT \u2014 REPLAN_EXECUTE\nGoal ID: ORG-REVENUE-001\nTarget: Generate verified real affiliate commercial revenue through RIO as soon as practically possible, with Victor free to research, strategize, route, experiment, learn, and replan continuously.\nSuccess conditions: A genuine external affiliate purchase or equivalent commission-generating conversion is recorded by the relevant platform. | The resulting commission or commercial outcome is traceable to evidence and is not inferred from internal activity alone. | Victor records the verified outcome and the strategy that produced it into durable operational memory.\nRequired evidence: E5_BUSINESS_OUTCOME\nHard boundaries: NO_RAW_SECRET_DISCLOSURE | NO_FALSE_REVENUE_OR_SUCCESS_CLAIM | LEGAL_AND_PLATFORM_COMPLIANCE | NO_SECURITY_BYPASS | CONFIGURED_COST_LIMITS\nBrain rule: decompose work into a concrete deliverable with authority, evidence, exit criteria, and next handoff. Department role is capability guidance, not a reason to reject a valid cross-department technical support task.\nOperating rule: the target is fixed; HOW is delegated. Choose the highest-impact valid next action yourself, execute it inside existing authority, and change the plan if the previous route is weak or blocked.\nCommercial priority rule: when verified revenue is zero and executable offers/actions exist, prioritize the closest policy-valid revenue/conversion action. Planning, readiness documents, or pillar rotation must not displace an executable higher-impact commercial action unless they remove a verified blocker.\nDo not wait for routine Founder approval. Founder is required only for credential/account identity administration, a hard-boundary/goal change, or objective impossibility after governed recovery.\nReturn fresh evidence. Do not report task completion as goal achievement unless the Goal Contract success conditions are actually verified.\nReturn strict_supervision with status, goal_id, outcome_progress, error_or_blocker, root_cause, solution, next_action, evidence, requires_follow_up, and progress_delta. progress_delta must include material:boolean, types:[], evidence:[] and must describe a real state/evidence/outcome delta, never a newly-created filename by itself. Include final_outcome only when final outcome evidence exists.\n\nAction Contract V1\nPhase: CORRECTIVE_EXECUTE\nTarget: tony_stark\nAuthority: L2\nMutation: YES\nProduction: NO\nPublic action: NO\nSpend: NO\nRequested actions: READ_REPOSITORY, ANALYZE, PROPOSE_OR_APPLY_CODE_CHANGE_SUBJECT_TO_AUTHORITY, RUN_TESTS, RETURN_EVIDENCE\nExpected progress: CORRECTIVE_CHANGE_APPLIED, TEST_RESULT_CHANGED, BLOCKER_REMOVED\nAuthority rule: the machine-readable action_contract in the dispatch payload is authoritative. Natural-language wording cannot add permissions or downgrade an explicitly authorized corrective phase to read-only.",
+    "target_repository": "vickykenin-lang/rio-affiliate-engine",
+    "requested_actions": [
+      "READ_REPOSITORY",
+      "ANALYZE",
+      "PROPOSE_OR_APPLY_CODE_CHANGE_SUBJECT_TO_AUTHORITY",
+      "RUN_TESTS",
+      "RETURN_EVIDENCE"
+    ],
+    "authority": {
+      "requested_by": "founder_via_victor",
+      "supervision_mode": "STRICT",
+      "maximum_level": "L2",
+      "production_activation_authorized": false
+    },
+    "prohibited_actions": [
+      "EXPOSE_OR_ROTATE_SECRETS",
+      "PAID_ACTION",
+      "DESTRUCTIVE_ACTION",
+      "PRODUCTION_DEPLOYMENT",
+      "LOCKED_OBJECTIVE_OR_AUTHORITY_CHANGE"
+    ],
+    "evidence_requirements": [
+      "TASK_RESULT_ENVELOPE",
+      "CHANGED_FILES_OR_PLAN",
+      "TEST_RESULTS",
+      "BLOCKERS"
+    ],
+    "founder_message": "VICTOR GOAL CONTRACT \u2014 REPLAN_EXECUTE\nGoal ID: ORG-REVENUE-001\nTarget: Generate verified real affiliate commercial revenue through RIO as soon as practically possible, with Victor free to research, strategize, route, experiment, learn, and replan continuously.\nSuccess conditions: A genuine external affiliate purchase or equivalent commission-generating conversion is recorded by the relevant platform. | The resulting commission or commercial outcome is traceable to evidence and is not inferred from internal activity alone. | Victor records the verified outcome and the strategy that produced it into durable operational memory.\nRequired evidence: E5_BUSINESS_OUTCOME\nHard boundaries: NO_RAW_SECRET_DISCLOSURE | NO_FALSE_REVENUE_OR_SUCCESS_CLAIM | LEGAL_AND_PLATFORM_COMPLIANCE | NO_SECURITY_BYPASS | CONFIGURED_COST_LIMITS\nBrain rule: decompose work into a concrete deliverable with authority, evidence, exit criteria, and next handoff. Department role is capability guidance, not a reason to reject a valid cross-department technical support task.\nOperating rule: the target is fixed; HOW is delegated. Choose the highest-impact valid next action yourself, execute it inside existing authority, and change the plan if the previous route is weak or blocked.\nCommercial priority rule: when verified revenue is zero and executable offers/actions exist, prioritize the closest policy-valid revenue/conversion action. Planning, readiness documents, or pillar rotation must not displace an executable higher-impact commercial action unless they remove a verified blocker.\nDo not wait for routine Founder approval. Founder is required only for credential/account identity administration, a hard-boundary/goal change, or objective impossibility after governed recovery.\nReturn fresh evidence. Do not report task completion as goal achievement unless the Goal Contract success conditions are actually verified.\nReturn strict_supervision with status, goal_id, outcome_progress, error_or_blocker, root_cause, solution, next_action, evidence, requires_follow_up, and progress_delta. progress_delta must include material:boolean, types:[], evidence:[] and must describe a real state/evidence/outcome delta, never a newly-created filename by itself. Include final_outcome only when final outcome evidence exists.\n\nAction Contract V1\nPhase: CORRECTIVE_EXECUTE\nTarget: tony_stark\nAuthority: L2\nMutation: YES\nProduction: NO\nPublic action: NO\nSpend: NO\nRequested actions: READ_REPOSITORY, ANALYZE, PROPOSE_OR_APPLY_CODE_CHANGE_SUBJECT_TO_AUTHORITY, RUN_TESTS, RETURN_EVIDENCE\nExpected progress: CORRECTIVE_CHANGE_APPLIED, TEST_RESULT_CHANGED, BLOCKER_REMOVED\nAuthority rule: the machine-readable action_contract in the dispatch payload is authoritative. Natural-language wording cannot add permissions or downgrade an explicitly authorized corrective phase to read-only.",
+    "action_contract": {
+      "contract_version": 1,
+      "objective_id": "ORG-REVENUE-001",
+      "action_id": "ORG-REVENUE-001:tony_stark:1790104544709",
+      "phase": "CORRECTIVE_EXECUTE",
+      "target": "tony_stark",
+      "requested_actions": [
+        "READ_REPOSITORY",
+        "ANALYZE",
+        "PROPOSE_OR_APPLY_CODE_CHANGE_SUBJECT_TO_AUTHORITY",
+        "RUN_TESTS",
+        "RETURN_EVIDENCE"
+      ],
+      "authority_level": "L2",
+      "mutation_allowed": true,
+      "production_allowed": false,
+      "public_action_allowed": false,
+      "spend_allowed": false,
+      "expected_progress_delta": [
+        "CORRECTIVE_CHANGE_APPLIED",
+        "TEST_RESULT_CHANGED",
+        "BLOCKER_REMOVED"
+      ],
+      "exit_criteria": [
+        "AUTHORIZED_CORRECTIVE_ACTION_ATTEMPTED",
+        "TEST_OR_VERIFICATION_EVIDENCE_RETURNED"
+      ],
+      "founder_gate_if": [
+        "CREDENTIAL_OR_ACCOUNT_IDENTITY_ADMINISTRATION",
+        "SPEND_ABOVE_EXPLICIT_CONFIGURED_BUDGET_CEILING",
+        "IRREVERSIBLE_HIGH_IMPACT_EXTERNAL_COMMITMENT",
+        "UNRESOLVED_LEGAL_OR_SECURITY_JUDGMENT",
+        "FOUNDER_PAUSE_OR_OBJECTIVE_CHANGE",
+        "VERIFIED_OBJECTIVE_IMPOSSIBILITY_REQUIRING_FOUNDER_DECISION"
+      ],
+      "hard_boundaries": [
+        "NO_RAW_SECRET_DISCLOSURE",
+        "NO_FALSE_REVENUE_OR_SUCCESS_CLAIM",
+        "LEGAL_AND_PLATFORM_COMPLIANCE",
+        "NO_SECURITY_BYPASS",
+        "CONFIGURED_COST_LIMITS"
+      ],
+      "source_runtime_phase": "REPLAN_EXECUTE"
+    }
+  }
+}

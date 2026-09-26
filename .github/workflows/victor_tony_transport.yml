@@ -90,7 +90,7 @@ jobs:
       TONY_TASK_ID: ${{ inputs.task_id }}
       TONY_TASK_TYPE: ${{ inputs.task_type }}
       TONY_TASK_PAYLOAD: ${{ inputs.payload }}
-      TONY_TARGET_REPO_PATH: ${{ github.workspace }}/_target/rio-affiliate-engine
+      TONY_TARGET_REPO_PATH: ${{ github.workspace }}/_target/target
     steps:
       - uses: actions/checkout@v4
         with:
@@ -107,15 +107,21 @@ jobs:
           python - <<'PY'
           import json, os
           target = json.loads(os.environ["RAW_PAYLOAD"]).get("target_repository", "")
+          allowed = {
+              "vickykenin-lang/rio-affiliate-engine",
+              "vickykenin-lang/Dr.-Victor-Multi-AI-Orchestrator",
+          }
+          if target not in allowed:
+              target = ""
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as handle:
               handle.write(f"repository={target}\n")
           PY
-      - name: Checkout RIO read-only audit target
-        if: steps.target.outputs.repository == 'vickykenin-lang/rio-affiliate-engine'
+      - name: Checkout governed read-only audit target
+        if: steps.target.outputs.repository != ''
         uses: actions/checkout@v4
         with:
-          repository: vickykenin-lang/rio-affiliate-engine
-          path: _target/rio-affiliate-engine
+          repository: ${{ steps.target.outputs.repository }}
+          path: _target/target
           persist-credentials: false
           fetch-depth: 1
       - name: Execute governed Tony task

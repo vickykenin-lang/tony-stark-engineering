@@ -9,6 +9,10 @@ from rio_readonly_audit import audit_repository, build_repair_plan
 ROOT = Path(__file__).resolve().parents[1]
 ALLOWED = {"STATUS_CHECK", "HEALTH_CHECK", "DIAGNOSTIC", "REPAIR_PLAN", "POST_REPAIR_VERIFY", "TASK_REQUEST"}
 MANDATORY_TASK_PROHIBITIONS = {"EXPOSE_OR_ROTATE_SECRETS", "PAID_ACTION", "DESTRUCTIVE_ACTION", "PRODUCTION_DEPLOYMENT", "LOCKED_OBJECTIVE_OR_AUTHORITY_CHANGE"}
+READ_ONLY_AUDIT_TARGETS = {
+    "vickykenin-lang/rio-affiliate-engine",
+    "vickykenin-lang/Dr.-Victor-Multi-AI-Orchestrator",
+}
 REQUIRED = [
     ROOT / "OBJECTIVE.md",
     ROOT / "SOUL.md",
@@ -111,8 +115,11 @@ def main():
             execution_status = "ACCEPTED_PENDING_EXECUTION_EVIDENCE"
             strict["solution"] = "Governed task envelope accepted. Only authorized repository work may proceed; production, secrets, paid and destructive actions remain blocked."
             target_path = os.getenv("TONY_TARGET_REPO_PATH", "").strip()
-            if payload.get("target_repository") == "vickykenin-lang/rio-affiliate-engine" and target_path:
+            target_repository = payload.get("target_repository")
+            if target_repository in READ_ONLY_AUDIT_TARGETS and target_path:
                 audit = audit_repository(Path(target_path), task_id)
+                audit["target_repository"] = target_repository
+                audit["summary"] = f"{target_repository} read-only static audit completed: {len(audit['findings'])} finding(s), {audit['file_count']} files inspected. No repository file was changed and no code was executed."
                 audit_out = ROOT / "integration" / "results" / "audits" / f"{task_id}.json"
                 audit_out.parent.mkdir(parents=True, exist_ok=True)
                 audit_out.write_text(json.dumps(audit, indent=2) + "\n", encoding="utf-8")
@@ -120,9 +127,9 @@ def main():
                 strict["status"] = "READ_ONLY_AUDIT_COMPLETED"
                 strict["root_cause"] = audit["root_cause"]
                 strict["solution"] = audit["summary"]
-                strict["next_action"] = "VICTOR_REVIEW_AUDIT_AND_AUTHORIZE_REPAIR_PLAN"
+                strict["next_action"] = "VICTOR_REVIEW_AUDIT_AND_SELECT_NEXT_GOVERNED_ACTION"
                 strict["evidence"].extend([str(audit_out.relative_to(ROOT))] + audit["evidence_files"][:12])
-                if payload.get("authority", {}).get("maximum_level") == "L1" and re.search(r"repair[ _-]?plan", payload.get("objective", ""), re.I):
+                if target_repository == "vickykenin-lang/rio-affiliate-engine" and payload.get("authority", {}).get("maximum_level") == "L1" and re.search(r"repair[ _-]?plan", payload.get("objective", ""), re.I):
                     plan = build_repair_plan(audit, payload)
                     plan_out = ROOT / "integration" / "results" / "plans" / f"{task_id}.json"
                     plan_out.parent.mkdir(parents=True, exist_ok=True)

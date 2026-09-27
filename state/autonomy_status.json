@@ -1,16 +1,17 @@
 {
-  "checked_at_utc": "2026-09-27T01:26:16+00:00",
+  "checked_at_utc": "2026-09-27T08:08:38+00:00",
   "department": "tony_stark",
   "mode": "DIAGNOSTIC_READY_MANAGED",
   "cycle": "WAKE_VALIDATE_MONITOR_DIAGNOSE_REPORT",
-  "state": "CYCLE_VERIFIED",
+  "state": "CYCLE_BLOCKED",
   "ai_health": "HEALTHY",
-  "github_access": "HEALTHY",
+  "github_access": "FAILED",
   "monitoring": {
-    "health": "HEALTHY",
-    "runs_checked": 10,
-    "workflows_evaluated": 4,
-    "failed_runs": []
+    "health": "FAILED",
+    "runs_checked": 0,
+    "failed_runs": [],
+    "error_class": "HTTPError",
+    "http_status": 401
   },
   "incident_detected": false,
   "diagnosis_automated": true,

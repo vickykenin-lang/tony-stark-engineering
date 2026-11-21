@@ -1,10 +1,10 @@
 {
-  "checked_at_utc": "2026-11-21T01:33:09+00:00",
+  "checked_at_utc": "2026-11-21T09:48:07+00:00",
   "department": "tony_stark",
   "mode": "DIAGNOSTIC_READY_MANAGED",
   "cycle": "WAKE_VALIDATE_MONITOR_DIAGNOSE_REPORT",
   "state": "CYCLE_BLOCKED",
-  "ai_health": "HEALTHY",
+  "ai_health": "FAILED",
   "github_access": "FAILED",
   "monitoring": {
     "health": "FAILED",
